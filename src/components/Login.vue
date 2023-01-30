@@ -12,6 +12,7 @@
         :model="formLabelAlign"
         class="bd"
         :rules="LoginRules"
+        ref="loginFormRef"
       >
         <!-- 用户名 -->
         <el-form-item prop="user">
@@ -33,10 +34,8 @@
         </el-form-item>
         <!-- 登录与重置 -->
         <el-form-item class="an">
-          <el-button type="primary" @click="submitForm('ruleForm')"
-            >登录</el-button
-          >
-          <el-button type="info" @click="resetForm('ruleForm')">重置</el-button>
+          <el-button type="primary" @click="submitLoginForm()">登录</el-button>
+          <el-button type="info" @click="resetLoginForm()">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -72,7 +71,28 @@ export default {
   },
   components: {},
   mounted() {},
-  methods: {},
+  methods: {
+    // 点击重置  登陆表单
+    resetLoginForm() {
+      console.log(this);
+      this.$refs.loginFormRef.resetFields();
+    },
+    // 登录预验证
+    submitLoginForm() {
+      this.$refs.loginFormRef.validate(async (valid) => {
+        if (!valid) return;
+        const { data: res } = await this.$http.post("login", {
+          username: this.formLabelAlign.user,
+          password: this.formLabelAlign.password,
+        });
+        console.log(res);
+        if (res.meta.status !== 200) return this.$message.error("登陆失败");
+        this.$message.success("登陆成功");
+        window.sessionStorage.setItem("token", res.data.token);
+        this.$router.push("/home");
+      });
+    },
+  },
 };
 </script>
 <style scoped lang='less'>

@@ -14,11 +14,27 @@ const routes = [
     name: 'Login',
     component: () => import("@/components/Login.vue")
   },
+  {
+    path: '/home',
+    name: 'Home',
+    component: () => import("@/components/Home.vue")
+  },
 
 ]
 
 const router = new VueRouter({
   routes
 })
+// 挂载路由守卫
+router.beforeEach((to, from, next) => {
+  // to  要访问的路径
+  // from  从哪个路径来的
+  // next  放行  next("/login")强制跳转 
 
+  if (to.path === "/login") return next()
+  // 获取toktn
+  const token_ = window.sessionStorage.getItem('token')
+  if (!token_) return next('/login')
+  next()
+})
 export default router
