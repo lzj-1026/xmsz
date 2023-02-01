@@ -1,6 +1,5 @@
 <template>
   <div class="lg">
-    登录界面
     <div class="lg_box">
       <!-- 头像 -->
       <div class="top">

@@ -17,7 +17,30 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import("@/components/Home.vue")
+    component: () => import("@/components/Home.vue"),
+    children: [
+      {
+        path: '/home',
+        redirect: '/home/welcome'
+      }
+      ,
+      {
+        path: 'welcome',
+        component: () => import('@/components/Welcome.vue')
+      },
+      {
+        path: '/users',
+        component: () => import('@/components/user/User.vue')
+      },
+      {
+        path: '/rights',
+        component: () => import('@/components/power/Rights.vue')
+      },
+      {
+        path: '/roles',
+        component: () => import('@/components/power/Roles.vue')
+      }
+    ]
   },
 
 ]
