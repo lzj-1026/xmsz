@@ -107,7 +107,7 @@ export default {
       let { data: res } = await this.axios.get("menus");
       if (res.meta.status !== 200) return this.$$message.error(res.meta.msg);
       this.menuList = res.data;
-      console.log(res);
+      // console.log(res);
     },
     // 点击按钮切换菜单折叠展开
     tog_button() {

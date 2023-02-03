@@ -4,7 +4,7 @@ import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/font/iconfont.css'
-
+import TreeTable from 'vue-table-with-tree-grid'
 Vue.use(ElementUI);
 
 import axios from 'axios'
@@ -17,6 +17,10 @@ axios.interceptors.request.use(function (config) {
   config.headers.Authorization = window.sessionStorage.getItem('token')
   return config
 });
+
+// 注册tree-table
+
+Vue.component('tree-table', TreeTable)
 
 
 
