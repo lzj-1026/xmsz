@@ -60,6 +60,10 @@ const routes = [
         path: '/reports',
         component: () => import('@/components/report/Report.vue')
       },
+      {
+        path: '/orders',
+        component: () => import('@/components/order/Order.vue')
+      },
     ]
   },
 

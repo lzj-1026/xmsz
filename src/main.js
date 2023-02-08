@@ -15,7 +15,7 @@ Vue.use(VueQuillEditor);
 
 // 引入echarts
 //  引入Echarts
-import * as echarts from 'echarts'
+import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 
 

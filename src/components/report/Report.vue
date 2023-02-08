@@ -10,58 +10,67 @@
     <!-- 卡片视图区域 -->
     <el-card
       ><!-- 柱状图 -->
-      <div id="main" style="height: 290px; width: 550px"></div>
+      <div id="main" style="height: 400px; width: 850px"></div>
     </el-card>
   </div>
 </template>
 
 <script>
-// import echarts from "echarts";
+import echarts from "echarts";
+import _ from "lodash";
 export default {
   props: {},
   data() {
-    return {};
+    return {
+      options: {
+        title: {
+          text: "用户来源",
+        },
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "cross",
+            label: {
+              backgroundColor: "#E9EEF3",
+            },
+          },
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        xAxis: [
+          {
+            boundaryGap: false,
+          },
+        ],
+        yAxis: [
+          {
+            type: "value",
+          },
+        ],
+      },
+    };
   },
   components: {},
   computed: {},
   // 此时页面上的元素已经被渲染完毕
-  mounted() {
-    this.initCharts();
+  async mounted() {
+    var myChart = echarts.init(document.getElementById("main"));
+
+    const { data: res } = await this.$http.get("reports/type/1");
+    if (res.meta.status !== 200) {
+      return this.$message.error("获取折线图数据失败");
+    }
+    // 准备数据和配置项
+    const result = _.merge(res.data, this.options);
+
+    //展示数据。
+    myChart.setOption(result);
   },
-  methods: {
-    initCharts() {
-      //2. 初始化echarts
-      var myChart = echarts.init(document.getElementById("main"));
-      // 准备数据和配置项
-      var option = {
-        title: {
-          text: "月销量",
-        },
-        // 提示框
-        tooltip: {},
-        // 图例
-        legend: {
-          data: ["销量"],
-        },
-        // 表示x轴坐标
-        xAxis: {
-          data: ["oppo", "vivo", "iphone", "小米", "三星", "魅族"],
-        },
-        // 表示y轴坐标
-        yAxis: {},
-        //
-        series: [
-          {
-            name: "销量",
-            type: "bar",
-            data: [3500, 2200, 4500, 6500, 200, 3000],
-          },
-        ],
-      };
-      // 展示数据
-      myChart.setOption(option);
-    },
-  },
+  methods: {},
 };
 </script>
 <style scoped lang='less'>
