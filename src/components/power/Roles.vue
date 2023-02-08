@@ -15,7 +15,7 @@
         </el-col>
       </el-row>
       <!-- 角色列表区域 -->
-      <el-table :data="roleList" border stripe>
+      <el-table :data="roleList" border stripe row-key="id">
         <!-- 展开列 -->
         <el-table-column type="expand">
           <!-- 通过插槽渲染数据 -->
