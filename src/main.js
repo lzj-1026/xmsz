@@ -13,6 +13,11 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 Vue.use(VueQuillEditor);
 
+// 引入echarts
+//  引入Echarts
+import * as echarts from 'echarts'
+Vue.prototype.$echarts = echarts
+
 
 Vue.use(ElementUI);
 
