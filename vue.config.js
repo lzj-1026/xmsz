@@ -7,7 +7,7 @@ module.exports = defineConfig({
       config.entry('app').clear().add('@/main-prod.js')
 
       config.set('externals', {
-        vue: 'Vue', 'vue-router': 'VueRouter', axios: 'axios', lodash: '_', echarts: 'echarts', nprogress: 'NProgress', 'vue-quill-editor': 'VueQuillEditor'
+        vue: 'vue', 'vue-router': 'VueRouter', axios: 'axios', lodash: '_', echarts: 'echarts', nprogress: 'NProgress', 'vue-quill-editor': 'VueQuillEditor'
       })
     })
     // 开发模式
